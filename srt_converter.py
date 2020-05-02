@@ -5,7 +5,6 @@ AUTHOR: MICHAEL HONG
 """
 
 import xml.etree.ElementTree as ET
-from opencc import OpenCC
 import re
 import copy
 import argparse
@@ -29,6 +28,7 @@ XML_TEMPLATE = args.template
 
 cc = None
 if args.convert:
+	from opencc import OpenCC
 	cc = OpenCC(args.convert)
 
 framerate_tuple = (1001, 30000) # default to 29.97fps
