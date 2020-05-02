@@ -43,9 +43,9 @@ optional arguments:
                         output. In seconds
 ```
 
-Input file name '-i' and ouput file name '-o' are required. They have to be either .srt or .fcpxml files.
+Input file name `-i` and ouput file name `-o` are required. They have to be either .srt or .fcpxml files.
 
-You can create your own fcpxml template (change framerate, set text location, format, etc.) using Final Cut Pro. 
+You can create your own fcpxml template (change framerate, set text location, format, etc.) using Final Cut Pro and then export as .fcpxml. 
 The script will use the **first** title in the timeline as the prototype to create all title elements.
 
 Please also make sure the framerate is correctly specified in your template (as `fcpxml>resources>format>frameDuration`)
