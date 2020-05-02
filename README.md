@@ -1,90 +1,78 @@
 # .SRT .FCPXML CONVERTER
 
 A python script that converts between .srt files and .fcpxml files to create/extract embedded captions for Final Cut Pro.
-
-
-One Paragraph of project description goes here
+Optional feature to convert between Simplified/Traditional Chinese (using OpenCC).
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+You only need `srt_converter.py` and `Template.xml` (if converting to .fcpxml).
 
-### Prerequisites
+Make sure you have Python 3 installed.
 
-What things you need to install the software and how to install them
-
+For conversion between Simplified/Traditional Chinese, you would need OpenCC for Python.
+You can install it using:
 ```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
+pip install opencc-python-reimplemented
 ```
 
-And repeat
+## Usage
 
+You can use `python srt_converter.py -h` to see all the flags supported and their usage:
 ```
-until finished
+usage: srt_converter.py [-h] -i INPUT -o OUTPUT [-c CONVERT] [-t TEMPLATE] [-fr FRAMERATE]
+                        [--offset OFFSET]
+
+Convert between .srt and .fcpxml files for subtitles creation.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -i INPUT, --input INPUT
+                        name for the input file (.srt or .fcpxml)
+  -o OUTPUT, --output OUTPUT
+                        name for the ouput file (.srt or .fcpxml)
+  -c CONVERT, --convert CONVERT
+                        (optional) to use OpenCC to convert between Simplified/Traditional
+                        Chinese. Please specify the OpenCC configurations (e.g., s2t, t2s)
+  -t TEMPLATE, --template TEMPLATE
+                        (optional) to use a user-specific template file to generate .fcpxml.
+                        Default to 'Template.xml'
+  -fr FRAMERATE, --framerate FRAMERATE
+                        (optional) framerate should be set in the template. This argument
+                        provides a sanity check. Default to 29.97fps
+  --offset OFFSET       (optional) move the entire timeline forward/backward from input to
+                        output. In seconds
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Input file name '-i' and ouput file name '-o' are required. They have to be either .srt or .fcpxml files.
 
-## Running the tests
+You can create your own fcpxml template (change framerate, set text location, format, etc.) using Final Cut Pro. 
+The script will use the **first** title in the timeline as the prototype to create all title elements.
 
-Explain how to run the automated tests for this system
+Please also make sure the framerate is correctly specified in your template (as `fcpxml>resources>format>frameDuration`)
+Please set the `-fr` flag (in fps) to the correct framerate if the framerate is not 29.97fps (default)
+The `-fr` flag is intended only as a sanity check. The output framerate is solely determined by the template file.
 
-### Break down into end to end tests
+## Testing
 
-Explain what these tests test and why
+Some tests are provided in `/FCPX_test`. You can rerun the tests following the following steps:
 
+1) Export the `test1` project of the library `srt_converter_test` into `xml_output.fcpxml` in Final Cut Pro
+
+2) Convert `xml_output.fcpxml` to `xml2srt.srt` using (assume you are in the directory):
 ```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
+python ../srt_converter.py -i "xml_output.fcpxml" -o "xml2srt.srt"
 ```
 
-## Deployment
+3) Then you can convert back `xml2srt.srt` to `xml2srt2xml.fcpxml` based on `xml_output.fcpxml` as the template using:
+```
+python ../srt_converter.py -i "xml2srt.srt" -o "xml2srt2xml.fcpxml" -t "xml_output.fcpxml" -fr 23.98
+```
 
-Add additional notes about how to deploy this on a live system
+4) If you import `xml2srt2xml.fcpxml` back into Final Cut Pro - you should be able to get a project file that is exactly identical to what we started with. 
 
-## Built With
+## Template
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+Theoratically, any .xml or .fcpxml file can be a template. However, I would recommend keeping the template simple so that the output .fcpxml file would not contain any unnecessary information. 
 
-## Contributing
+Please also make sure the template `<spine>` has at least one `<title>` tag that the script can use to create other titles.
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
