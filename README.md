@@ -15,6 +15,11 @@ You can install it using:
 pip install opencc-python-reimplemented
 ```
 
+To convert from .srt to .fcpxml (the most common use case), use:
+```
+python srt_converter.py -i INPUT_FILE.srt -o OUTPUT_FILE.fcpxml
+```
+
 ## Usage
 
 You can use `python srt_converter.py -h` to see all the flags supported and their usage:
