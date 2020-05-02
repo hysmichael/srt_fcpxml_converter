@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fcpxml>
+
+<fcpxml version="1.8">
+    <resources>
+        <format id="r1" name="FFVideoFormat1080p2997" frameDuration="1001/30000s" width="1920" height="1080" colorSpace="1-1-1 (Rec. 709)"/>
+        <effect id="r2" name="Custom" uid=".../Titles.localized/Build In:Out.localized/Custom.localized/Custom.moti"/>
+    </resources>
+    <library>
+        <event name="{EVENT_NAME}">
+            <project name="{PROJECT_NAME}">
+                <sequence format="r1" tcStart="0s" tcFormat="NDF">
+                    <spine>
+                        <title name="{TITLE_NO}" offset="{OFFSET}" ref="r2" duration="{DURATION}" start="{START}">
+                            <param name="Position" key="9999/10199/10201/1/100/101" value="0 -418.279"/>
+                            <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+                            <param name="Alignment" key="9999/10199/10201/2/373" value="0 (Left) 2 (Bottom)"/>
+                            <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+                            <param name="Wrap Mode" key="9999/10199/10201/5/10203/21/25/5" value="1 (Repeat)"/>
+                            <param name="Color" key="9999/10199/10201/5/10203/30/32" value="0 0 0"/>
+                            <param name="Wrap Mode" key="9999/10199/10201/5/10203/30/34/5" value="1 (Repeat)"/>
+                            <param name="Width" key="9999/10199/10201/5/10203/30/36" value="3"/>
+                            <text>
+                                <text-style ref="ts1">{TEXT}</text-style>
+                            </text>
+                            <text-style-def id="ts1">
+                                <text-style font="Arial" fontSize="50" fontFace="Regular" fontColor="0.999996 1 1 1" shadowColor="0 0 0 0.75" shadowOffset="5 315" alignment="center"/>
+                            </text-style-def>
+                        </title>
+                    </spine>
+                </sequence>
+            </project>
+        </event>
+    </library>
+</fcpxml>

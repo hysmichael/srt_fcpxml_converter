@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fcpxml>
+
+<fcpxml version="1.8">
+    <resources>
+        <format id="r1" name="FFVideoFormat1080p2398" frameDuration="1001/24000s" width="1920" height="1080" colorSpace="1-1-1 (Rec. 709)"/>
+        <effect id="r2" name="Basic Title" uid=".../Titles.localized/Bumper:Opener.localized/Basic Title.localized/Basic Title.moti"/>
+    </resources>
+    <library location="file:///Users/macbook/Movies/SRT%20Converter/FCPX_test/srt_converter_test.fcpbundle/">
+        <event name="2-05-2020" uid="7D886D7B-2D33-4F47-8285-89DD091956A9">
+            <project name="test1" uid="9F14ED8E-7480-4A7A-9470-AA4D62DFD1CB" modDate="2020-05-02 14:20:50 +0100">
+                <sequence duration="3603600/120000s" format="r1" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
+                    <spine>
+                        <gap name="Gap" offset="0s" duration="1201200/120000s" start="86400314/24000s"/>
+                        <title name="Hello World - Basic Title" offset="1201200/120000s" ref="r2" duration="950950/120000s" start="86486400/24000s">
+                            <param name="Flatten" key="9999/999166631/999166633/2/351" value="1"/>
+                            <param name="Alignment" key="9999/999166631/999166633/2/354/999169573/401" value="1 (Center)"/>
+                            <text>
+                                <text-style ref="ts1">Hello World</text-style>
+                            </text>
+                            <text-style-def id="ts1">
+                                <text-style font="Helvetica" fontSize="63" fontFace="Regular" fontColor="0.999996 1 1 1" alignment="center"/>
+                            </text-style-def>
+                        </title>
+                        <gap name="Gap" offset="2152150/120000s" duration="250250/120000s" start="86400314/24000s"/>
+                        <title name="Bye World - Basic Title" offset="2402400/120000s" ref="r2" duration="1201200/120000s" start="86486400/24000s">
+                            <param name="Flatten" key="9999/999166631/999166633/2/351" value="1"/>
+                            <param name="Alignment" key="9999/999166631/999166633/2/354/999169573/401" value="1 (Center)"/>
+                            <text>
+                                <text-style ref="ts2">Bye World</text-style>
+                            </text>
+                            <text-style-def id="ts2">
+                                <text-style font="Helvetica" fontSize="63" fontFace="Regular" fontColor="0.999996 1 1 1" alignment="center"/>
+                            </text-style-def>
+                        </title>
+                    </spine>
+                </sequence>
+            </project>
+        </event>
+        <smart-collection name="Projects" match="all">
+            <match-clip rule="is" type="project"/>
+        </smart-collection>
+        <smart-collection name="All Video" match="any">
+            <match-media rule="is" type="videoOnly"/>
+            <match-media rule="is" type="videoWithAudio"/>
+        </smart-collection>
+        <smart-collection name="Audio Only" match="all">
+            <match-media rule="is" type="audioOnly"/>
+        </smart-collection>
+        <smart-collection name="Stills" match="all">
+            <match-media rule="is" type="stills"/>
+        </smart-collection>
+        <smart-collection name="Favorites" match="all">
+            <match-ratings value="favorites"/>
+        </smart-collection>
+    </library>
+</fcpxml>
